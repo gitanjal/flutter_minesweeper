@@ -48,28 +48,29 @@ class _MinesweeperBoardState extends State<MinesweeperBoard> {
                         child: Card(
                           elevation: 8,
                           child: thisCell.revealed ||
-                                  widget.minesweeper.state == GameState.lost
+                              widget.minesweeper.state == GameState.lost
                               ? Container(
-                                  height: 20,
-                                  width: 20,
-                                  color: Colors.black26,
-                                  child: thisCell.hasMine
-                                      ? Icon(Icons.bolt)
-                                      : Text(
-                                          '${thisCell.adjacentMineCount == 0 ? '' : thisCell.adjacentMineCount}'))
-                              : Container(
-                                  height: 20,
-                                  width: 20,
-                                  color: Colors.green,
-/*                          child: thisCell.hasMine
+                              height: 20,
+                              width: 20,
+                              color: Colors.black26,
+                              child: thisCell.hasMine
                                   ? Icon(Icons.bolt)
                                   : Text(
-                                  '${thisCell.adjacentMineCount == 0 ? '' : thisCell.adjacentMineCount}')*/
-                                ),
+                                  '${thisCell.adjacentMineCount == 0 ? '' : thisCell.adjacentMineCount}'))
+                              : Container(
+                            height: 20,
+                            width: 20,
+                            color: Colors.green,
+/*                          child: thisCell.hasMine
+                                    ? Icon(Icons.bolt)
+                                    : Text(
+                                    '${thisCell.adjacentMineCount == 0 ? '' : thisCell.adjacentMineCount}')*/
+                          ),
                         ),
                       ),
                     );
-                  }),
+                  })
+
             ),
             Container(
               child: Column(
