@@ -1,19 +1,27 @@
 import 'dart:math';
 
 import 'package:minesweeper/models/cell.dart';
+import 'package:minesweeper/models/mineweeper.dart';
 import 'package:minesweeper/models/position.dart';
 
-
+enum GameState{
+  started,
+  lost,
+  won
+}
 class Minesweeper{
   late List<Position> minePositions;
   late List<Cell> cells;
   int count;
   int mineCount;
+  int openCellCount=0;
+  GameState state=GameState.started;
 
   Minesweeper([this.count=100,this.mineCount=10]){
     minePositions=generateMinePositions(mineCount);
     cells=createCells(count);
   }
+
 
   /*todo 2 step 2: Create a function to generate the mine positions*/
   List<Position> generateMinePositions(int count, {int maxX=10, int maxY=10})
@@ -79,14 +87,70 @@ class Minesweeper{
     return minesAdjacentToThisCell;
   }
 
+  attemptToReveal(Cell cell)
+  {
+    if(cell.hasMine)
+      {
+        //Lost
+        state=GameState.lost;
+      }
+    else
+      {
+        reveal(cell);
+      }
+  }
+
   reveal(Cell cell)
   {
-    cell.revealed=true;
-    for (var position in cell.adjacentCells) {
-      Cell thisCell=cells[position.index];
-      if(!thisCell.hasMine) {
-        cells[position.index].revealed = true;
+    if(cell.revealed || cell.hasMine)
+      {}
+    else
+      {
+        cell.revealed=true;
+        openCellCount++;
+
+        if(cell.adjacentMineCount>0)
+          {}
+        else {
+        for (var position in cell.adjacentCells) {
+          Cell thisCell =
+              cells.firstWhere((element) => element.position == position);
+          reveal(thisCell);
+        }
       }
     }
+
+    if(openCellCount==(count-mineCount))
+      {
+        print('++++++GAME WON++++++');
+        state=GameState.won;
+      }
   }
+  /*reveal(Cell cell)
+  {
+    openCellCount++;
+    cell.revealed=true;
+    for (var position in cell.adjacentCells) {
+      Cell thisCell=cells.firstWhere((element) => element.position==position);
+      if(!thisCell.hasMine){
+
+        if(thisCell.adjacentMineCount==0 && !thisCell.revealed)
+          {
+            reveal(thisCell);
+          }
+        else
+          {
+            thisCell.revealed = true;
+            openCellCount++;
+          }
+      }
+    }
+
+    print('open cells:$openCellCount');
+    if(openCellCount==(count-mineCount))
+      {
+        print('++++++GAME WON++++++');
+      }
+  }*/
+
 }
