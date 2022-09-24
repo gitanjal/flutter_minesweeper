@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:minesweeper/minesweeper_board.dart';
+import 'package:minesweeper/models/minesweeper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +30,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: MinesweeperBoard(Minesweeper()),
     );
   }
 }
