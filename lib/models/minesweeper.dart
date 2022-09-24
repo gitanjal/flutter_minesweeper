@@ -58,7 +58,9 @@ class Minesweeper {
       //Get the position
       rowNumber = (i / rowCount)
           .toInt(); //e.g. 5/10.toInt()=0 15/10.toInt()=1 1.5.toInt()=1
-      colNumber = i % rowCount; //e.g. 1%10=1 5%10=5 15%10=5
+
+      /*todo 1: +++++++Find the colNumber++++++++*/
+
       Position position = Position(rowNumber, colNumber);
       Cell cell = Cell(position);
       //hasMine
